@@ -16,7 +16,7 @@ const REG_PORT    = 8001;
 let ipAddressList = [];
 
 // eslint-disable-next-line no-undef
-let webRoot = frontSlash(pathObj.resolve(__dirname + '/'));
+let webRoot = frontSlash(pathObj.resolve(__dirname));
 main();
 
 
@@ -225,7 +225,7 @@ function handleFavIcon(response) {
 function handleFileRequest(fileName, paramObj, response) {
   fileName = fileName === '/' ? 'index.html' : fileName; // default index.html
 
-  const pathName = frontSlash(pathObj.normalize(webRoot + fileName));
+  const pathName = frontSlash(pathObj.normalize(webRoot + '/' + fileName));
   const pathParts = pathObj.parse(pathName);
   let status = {err:false, msg:''};
 

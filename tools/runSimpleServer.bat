@@ -9,5 +9,5 @@ pushd %~d0%~p0simpleServer
 pwd
 set NO_COLOR=1
 cmd /c node . --webroot ../../public
-
+popd
 endlocal
