@@ -1,0 +1,7 @@
+# .gitignore specific to the project
+# see aaa_notForProject/.gitignoreGlobal for an example of a global .gitignore
+
+#.gitignore
+#tools
+#extras
+#!aaa_notForProject/notes.txt

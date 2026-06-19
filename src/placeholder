@@ -1,0 +1,10 @@
+placeholder
+===========
+
+This is a placehold file so git will create the directory.
+src/ holds source code when you are not putting your work in public/
+
+public/ is where we keep the documentation for the project.
+It is also where you would put content if you were creating a public website
+(cloudflare looks for public/ if you are using cloudflare and hosting the
+code on github).

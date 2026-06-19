@@ -1,0 +1,79 @@
+/** index.css **/
+/*  _____________________     _                       _       _
+ / \                     \   | |_ ___ _ __ ___  _ __ | | __ _| |_ ___
+|   |                    |   | __/ _ \ '_ ` _ \| '_ \| |/ _` | __/ _ \
+ \_ |                    |   | ||  __/ | | | | | |_) | | (_| | ||  __/
+    |                    |    \__\___|_| |_| |_| .__/|_|\__,_|\__\___|
+    |                    |                     |_|
+    |                    |
+    |  __________________|__  project cardfx
+    |  \                    \
+    |  /                    /
+    \_/____________________/
+*/
+
+body {
+  accent-color:     var(--blue);
+  align-items:      center;
+  display:          flex;
+  flex-direction:   column;
+  justify-content:  space-between;
+  overflow:         hidden;
+}
+
+.pageTopCap {
+  background: rgb(253, 250, 250);
+  border-left: var(--border);
+  border-right: var(--border);
+  border-top-left-radius: var(--borderRadius);
+  border-top-right-radius: var(--borderRadius);
+  border-top: var(--border);
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
+  height: 1rem;
+  margin: 1rem 0 0 0;
+  max-width: 800px;
+  width: 100%;
+}
+
+.pageSection {
+  background: rgb(253, 250, 250);
+  border-left: var(--border);
+  border-right: var(--border);
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
+  flex-grow: 1;
+  margin: 0;
+  max-width: 800px;
+  padding: 0 1rem 0 1rem;
+  width: 100%;
+}
+
+.pageBottomCap {
+  background: rgb(253, 250, 250);
+  border-bottom-left-radius: var(--borderRadius);
+  border-bottom-right-radius: var(--borderRadius);
+  border-bottom: var(--border);
+  border-left: var(--border);
+  border-right: var(--border);
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
+  height: 1rem;
+  margin: 0 0 1rem 0;
+  max-width: 800px;
+  width: 100%;
+}
+
+/* detect phone */
+@media screen and (any-pointer: coarse) and (max-width: 900px) {
+  .pageSection {border: none;border-radius: 0;box-shadow: none;margin: 0;}
+}
+
+/* detect phone in portrait */
+@media screen and (any-pointer: coarse) and (orientation: portrait)
+    and (max-width: 400px) {
+}
+
+/* detect phone in landscape */
+@media screen and (any-pointer: coarse) and (orientation: landscape)
+    and (max-width: 900px) {
+  .pageBottomCap {display: none;}
+  .pageTopCap    {display: none;}
+}

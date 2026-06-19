@@ -1,0 +1,174 @@
+<!DOCTYPE html> <!-- index.html -->
+<html lang="en">
+<head>
+<!--_____________________     _                       _       _
+ / \                     \   | |_ ___ _ __ ___  _ __ | | __ _| |_ ___
+|   |                    |   | __/ _ \ '_ ` _ \| '_ \| |/ _` | __/ _ \
+ \_ |                    |   | ||  __/ | | | | | |_) | | (_| | ||  __/
+    |                    |    \__\___|_| |_| |_| .__/|_|\__,_|\__\___|
+    |                    |                     |_|
+    |                    |
+    |  __________________|__    project cardfx
+    |  \                    \
+    |  /                    /
+    \_/____________________/
+-->
+  <meta charset="utf-8" />
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>cardfx</title>
+  <meta name="description"                  content="directory of effects for cards"/>
+  <meta name="mobile-web-app-capable"       content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="msapplication-tap-highlight"  content="no"  />
+  <meta name="description"                  content="directory of effects for cards"/>
+  <meta name="theme-color"                  content="#EFF4FF"/>
+  <meta property="og:title"                 content="cardfx"/>
+  <meta property="og:description"           content="directory of effects for cards"/>
+  <meta property="og:image"                 content="./assets/images/logo.png"/>
+  <meta property="og:url"                   content=""/>
+
+  <link rel="apple-touch-icon" href="./assets/images/logo.png"/>
+  <link rel="icon"             href="./assets/images/logo.png"/>
+  <link rel="preload" as="font" crossorigin="anonymous" type="font/woff2"
+        href="./assets/fonts/monaSans/monaSans.woff2"/> <!--preload for speed-->
+  <link rel="stylesheet"       href="./assets/fonts/monaSans/monaSans.css"/>
+  <link rel="stylesheet"       href="./modules/base.css"/> <!--reset & common-->
+  <link rel="stylesheet"       href="./index.css"/>        <!--page specific-->
+  <script type="module"        src="./index.js"></script>
+</head>
+
+<body>
+  <div class=topSection>
+    <div class="topLeftSection">
+      <div class=topLeftSectionLogo>
+        <img src="./assets/images/logo.png" alt=logo/>
+      </div>
+    </div>
+    <div class="topCenterSection">
+      <div class="topCenterSectionTitle">cardfx</div>
+      <div class="topCenterSectionSubTitle">card effects</div>
+      <div class="topCenterSectionVersion">1.0.0</div>
+    </div>
+    <div class="topRightSection">
+      <div class="topRightSectionDate">
+        <div class="topDate"></div>
+        <div class="topLastModDate">
+          last modified:<span class=isNarrow><br></span> 21 May 2026
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class=pageTopCap></div>
+  <div class=middleSection>
+    <div class=pageSection>
+
+TemplateWebApp provides a skeleton structure for a web app.
+
+  It contains a directory structure, dev tool scripts, and a simple,
+  local node.js server. I use templateWebApp as a starting point for a
+  new idea, prototype, or project along with
+  <a href="https://rg3h.github.io/gt/public/index.html">gt</a>
+
+  It works well on your local machine (using the included node
+  server), for a git project, and for developing a new web app or site.
+
+  <h3>The Goodies!</h3>
+  <pre>
+  README.md..............template README.md for github
+  LICENCE, UNLICENCE.....various licenses for the code
+  index.html.............(for github) redirects to public/index.html
+  404.html...............(for github) redirects to public/error.html
+
+  <b>aaa_notForProject/</b>.....where non-essential files are kept
+   notes.txt.............notes on what I need to do with the project
+
+  <b>public/</b>................the web root or project documentation
+    index.html...........main app page
+    404.html.............on error show this page
+
+    <b>assets/</b>
+      <b>fonts/</b>
+        monaSans.css.....example variable font css file
+        monaSans.woff2...example variable font
+
+      <b>images/</b>
+        logo.png.........logo for the project
+
+    <b>modules/</b>
+      base.css...........sets css common for all pages
+      <b>date/</b>..............date tools
+      <b>util/</b>..............utility functions
+
+  <b>src/</b>...................when the code is not a web app it goes here
+
+  <b>tools/</b>.................development tools (lint, server, etc)
+    runServer.bat........windows bat command to run the local server
+    server...............simple node server for local testing (https)
+
+  <b>extras/</b>................extra templates
+   .gitignoreGlobal......example I use globally
+    404Generic.html......(for github) redirects to a global error page
+
+    <b>READMEExamples</b>.......example layouts for github README.md
+      READMEAccordian.md...example that opens and closes sections
+      READMECard.md......example that looks like a card
+      READMEGtCard.md....another exampleThat looks like a card
+      READMEHeader.md....a more usual github layout
+
+    <b>vanillaJSModules/</b>....vanilla javascript modules
+      <b>anim/</b>..............animation css
+      <b>color/</b>.............color tools and css
+      <b>date/</b>..............date tools
+      <b>event/</b>.............wrapper to dispatch and handle custom events
+      <b>html/</b>..............js to manipulate the DOM
+      <b>util/</b>..............utility functions
+
+    <b>webPageExamples</b>......example web page layouts
+      reset.css..........resets for a clean foundation
+      <b>fullPage/</b>..........example that uses the entire page
+      <b>landingPage/</b>.......example landing page
+      <b>paperPage/</b>.........example that looks like a paper page
+
+</pre>
+
+  <h3>Getting The Goodies!</h3>
+
+  <b>optional:</b> install my
+  <a href="https://github.com/rg3h/projectMaker">projectMaker</a>
+  from github. It helps you create a new app by downloading this
+  template and fixing all of the &#123;&#123;vars&#125;&#125;.
+  <br>
+  <br>
+  Or you can download the template manually:
+  <ol>
+    <li>download the
+      <a href="https://github.com/rg3h/templateWebApp/archive/refs/heads/main.zip">templateWebApp repository zip</a> and uncompress it</li>
+    <li><i>(optional)</i> &nbsp; install <a href="https://nodejs.org">node</a>
+      if you want to run the provided local server</li>
+  </ol>
+
+  <h3>Using the Goodies!</h3>
+  <ol>
+    <li>run a local server in tools/simpleServer (see tools/runSimpleServer.bat)</li>
+    <li>open your browser to https://localhost:8000 and let the
+    browser know it is ok</li>
+    <li>replace all &#123;&#123;vars&#125;&#125; with your project's settings</li>
+    <li>consider using
+      <a href="https://rg3h.github.io/gt/public/index.html">gt</a> to
+      create a github project easily and check in the new code
+  </ol>
+  <br>
+    </div>  <!-- pageSection -->
+  </div> <!-- middleSection -->
+  <div class=pageBottomCap></div>
+
+  <!--
+  <div class=bottomSection>
+    <div class="bottomLeftSection">bottomSectionLeft</div>
+    <div class="bottomCenterSection">bottomSectionCenter</div>
+    <div class="bottomRightSection">bottomSectionRight</div>
+  </div>
+  -->
+</body>
+</html>

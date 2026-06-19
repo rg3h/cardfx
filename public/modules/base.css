@@ -1,0 +1,325 @@
+/** base.css -- resets css and has css common to all pages**/
+
+/********** reset **********/
+
+/* box-sizing: border-box for all elements */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* prevent font size inflation on mobile */
+html {
+  -moz-text-size-adjust: 100%;    /* firefox */
+  -ms-text-size-adjust: 100%;     /* older internet explorer/edge */
+  -webkit-text-size-adjust: 100%; /* chrome, safari, newer edge */
+  text-size-adjust: 100%;         /* standard property */
+}
+
+/* remove default margins (except dialog for centering) */
+:not(dialog) {
+  margin: 0;
+}
+
+/* better typography */
+body {
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+  min-height: 100svh;
+  text-rendering: optimizelegibility;
+}
+
+
+/* balanced text wrapping for headers */
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 1rem;
+  overflow-wrap: break-word;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+/* media elements: responsive and block-level */
+img, picture, video, canvas, svg {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
+/* inherit fonts in form controls */
+input, button, textarea, select {
+  font: inherit;
+}
+
+/* ensure textareas have a usable height */
+textarea:not([rows]) {
+  min-height: 10em;
+}
+
+/* remove list styles only for semantic lists */
+ul[role="list"], ol[role="list"] {
+  list-style: none;
+  padding-inline-start: 0; /* logical property for rtl */
+}
+
+/* anchors get extra scroll margin */
+:target {
+  scroll-margin-block: 5ex;
+}
+
+/* isolation for root */
+#root, #__next {
+  isolation: isolate;
+}
+
+/* enable smooth size interpolations for animations */
+@media (prefers-reduced-motion: no-preference) {
+  html {scroll-behavior: smooth;}
+}
+
+
+
+/********** common css across several pages **********/
+
+/* fade up the page */
+@keyframes fadeUpAnim {0% {opacity: 0;} 100% {opacity: 1;}}
+
+:root {
+  --fadeUpAnim:            fadeUpAnim 0.5s ease-in-out 0.25s forwards;
+  --bgColor:               var(--extraLightBlue);
+  --fgColor:               black;
+  --accentColor:           var(--steelBlue);
+  --regFont:               monaSans;
+  --boldFont:              monaSansBold;
+  --lightFont:             monaSansLight;
+  --extraLightFont:        monaSansExtraLight;
+  --border:                solid 1px rgb(200, 200, 200);
+  --borderRadius:          1rem;
+
+  --extraLightBlue:        rgb(240, 245, 255);
+  --blue:                  rgb(  0,  90, 255);
+  --steelBlue:             rgb( 10, 100, 190);
+}
+
+html {
+  height:           100%;
+  margin:           0;
+  min-height:       100%;
+  min-width:        100%;
+  padding:          0;
+  width:            100%;
+}
+
+body {
+  animation:        var(--fadeUpAnim);
+  background-color: var(--bgColor);
+  color:            var(--fgColor);
+  font-family:      var(--regFont);
+  font-size:        15px;
+  height:           100%;
+  margin:           0;
+  max-height:       100%;
+  min-height:       100%;
+  min-width:        100%;
+  opacity:          0;
+  padding:          0;
+  width:            100%;
+}
+
+/* anchor */
+a {
+  box-shadow: 0px 5px 5px transparent;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.33rem;
+  transition-duration: 0.2s;
+  transition-property: color, box-shadow;
+  transition-timing-function: ease-in-out;
+  width: fit-content;
+}
+
+a:hover {
+  color: rgb(65, 60, 255);
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+pre {
+  font-size: 0.9rem;
+  line-height: 1.2rem;
+  overflow-wrap: break-word;  /* breaks long words preventing x-overflow */
+  white-space:pre-wrap;       /* preserves whitespace and wraps naturally */
+}
+
+button, .button, .blueButton, .greenButton {
+  background-color: rgb(200, 200, 200);
+  border-radius: 0.5rem;
+  border: none;
+  color: black;
+  cursor: pointer;
+  flex-grow: 0;
+  flex-shrink: 0;
+  font-size: 1rem;
+  padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+  text-decoration: none;
+  transition-duration: 0.15s;
+  transition-property: background;
+  transition-timing-function: ease-in-out;
+  user-select: none;
+}
+
+button:hover, .button:hover {
+  background-color: rgb(255, 255, 255);
+  color: black;
+}
+
+.blueButton {
+  background-color: rgb(0, 75, 175);
+  box-shadow: 5px 5px 5px rgb(0, 0, 0);
+  color: white;
+}
+
+.blueButton:hover {
+  background-color: rgb(0, 90, 255);
+  border: none;
+  color: white;
+}
+
+.greenButton {
+  background-color: green;
+  box-shadow: 5px 5px 5px rgb(0, 0, 0);
+  color: white;
+}
+
+.greenButton:hover {
+  background-color: rgb(0, 150, 50);
+  color: white;
+}
+
+.buttonDisabled {
+  background-color: rgb(205, 205, 205) !important;
+  border: 1px solid rgb(150, 150, 150) !important;
+  box-shadow: none  !important;
+  color: rgb(100, 100, 100)  !important;
+  pointer-events: none  !important;
+  user-select: none  !important;
+}
+
+.topSection {
+  display: flex;
+  flex-direction: row;
+  padding: 1rem 1rem 0.0 1rem;
+  width: 100%;
+}
+
+.topLeftSection {
+  width: 30%;
+}
+
+.topLeftSectionLogo {
+  aspect-ratio: 1 / 1;
+  width: 3rem;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.topCenterSection {
+  flex-grow: 1;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.topCenterSectionTitle {
+  font-family: var(--extraLightFont);
+  font-size: 2rem;
+}
+
+.topCenterSectionSubTitle {
+  font-family: var(--lightFont);
+  font-size: 1rem;
+}
+
+.topCenterSectionVersion {
+  font-family: var(--lightFont);
+  font-size: 0.8rem;
+}
+
+.topRightSection {
+  text-align: right;
+  width: 30%;
+}
+
+.topRightSectionDate {
+  font-size: 0.7rem;
+}
+
+.topDate {
+}
+
+.topLastModDate {
+  color: rgb(100, 100, 100);
+}
+
+.middleSection {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: auto;
+  overscroll-behavior: none;   /* stops over pulling on a phone */
+  width: 100%;
+}
+
+.bottomSection {
+  display: flex;
+  flex-direction: row;
+  padding: 0 1rem 0 1rem;
+  width: 100%;
+}
+
+.bottomLeftSection {
+  width: 33%;
+}
+
+.bottomCenterSection {
+  flex-grow: 1;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.bottomRightSection {
+  text-align: right;
+  width: 33%;
+}
+
+.isNarrow {
+  display:none;
+}
+
+/* detect phone */
+@media screen and (any-pointer: coarse) and (max-width: 900px) {
+  .topCenterSectionSubTitle {display: none;}
+  .topCenterSectionVersion  {display: none;}
+  .isNarrow {display:initial;}
+}
+
+/* detect phone in portrait */
+@media screen and (any-pointer: coarse) and (orientation: portrait)
+    and (max-width: 400px) {
+  pre {font-size: 0.5rem; line-height: 1.0rem;}
+  .topLeftSectionLogo{width: 2rem;}
+  .topCenterSectionTitle {font-size: 1.25rem;}
+
+}
+
+/* detect phone in landscape */
+@media screen and (any-pointer: coarse) and (orientation: landscape)
+    and (max-width: 900px) {
+  body {
+    padding-left:  max(1rem, env(safe-area-inset-left)); /* Apply safe area */
+    padding-right: max(1rem, env(safe-area-inset-right));
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+  .middleSection {margin-top: 0.5rem;}
+}
