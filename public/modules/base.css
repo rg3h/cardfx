@@ -197,6 +197,7 @@ button:hover, .button:hover {
   color: white;
 }
 
+
 .buttonDisabled {
   background-color: rgb(205, 205, 205) !important;
   border: 1px solid rgb(150, 150, 150) !important;

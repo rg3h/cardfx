@@ -1,54 +1,54 @@
 @font-face {
   font-display: optional;
-  font-family: 'monaSansExtraBold';
-  font-style: normal;
-  font-weight: 800;
-  font-width: 100;
-  src: url(monaSans.woff2) format('woff2-variations');
+  font-family:  'monaSansExtraBold';
+  font-style:   normal;
+  font-weight:  800;
+  font-width:   100;
+  src:          url(monaSans.woff2) format('woff2-variations');
 }
 
 @font-face {
   font-display: optional;
-  font-family: 'monaSansBold';
-  font-style: normal;
-  font-weight: 700;
-  font-width: 100;
-  src: url(monaSans.woff2) format('woff2-variations');
+  font-family:  'monaSansBold';
+  font-style:   normal;
+  font-weight:  700;
+  font-width:   100;
+  src:          url(monaSans.woff2) format('woff2-variations');
 }
 
 @font-face {
   font-display: optional;
-  font-family: 'monaSansMedium';
-  font-style: normal;
-  font-weight: 500;
-  font-width: 100;
-  src: url(monaSans.woff2) format('woff2-variations');
+  font-family:  'monaSansMedium';
+  font-style:   normal;
+  font-weight:  500;
+  font-width:   100;
+  src:          url(monaSans.woff2) format('woff2-variations');
 }
 
 @font-face {
   font-display: optional;
-  font-family: 'monaSans';
-  font-style: normal;
-  font-weight: 400;
+  font-family:  'monaSans';
+  font-style:   normal;
+  font-weight:  400;
   font-stretch: 100%;
   font-display: swap;
-  src: url(monaSans.woff2) format('woff2-variations');
+  src:          url(monaSans.woff2) format('woff2-variations');
 }
 
 @font-face {
   font-display: optional;
-  font-family: 'monaSansLight';
-  font-style: normal;
-  font-weight: 300;
-  font-width: 100;
-  src: url(monaSans.woff2) format('woff2-variations');
+  font-family:  'monaSansLight';
+  font-style:   normal;
+  font-weight:  300;
+  font-width:   100;
+  src:          url(monaSans.woff2) format('woff2-variations');
 }
 
 @font-face {
   font-display: optional;
-  font-family: 'monaSansExtraLight';
-  font-style: normal;
-  font-weight: 200;
-  font-width: 100;
-  src: url(monaSans.woff2) format('woff2-variations');
+  font-family:  'monaSansExtraLight';
+  font-style:   normal;
+  font-weight:  200;
+  font-width:   100;
+  src:          url(monaSans.woff2) format('woff2-variations');
 }

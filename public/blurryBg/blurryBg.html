@@ -1,0 +1,104 @@
+<!DOCTYPE html> <!-- @fileoverview: testWikiLib.html -->
+<html lang="en">
+<head>
+<!--                          _  __
+ ---         ___ __ _ _ __ __| |/ _|_  __
+|   |/\     / __/ _` | '__/ _` | |_\ \/ /
+|   |  \   | (_| (_| | | | (_| |  _|>  <
+|___| /     \___\__,_|_|  \__,_|_| /_/\_\
+    \/            project cardfx
+-->
+  <meta charset="utf-8" />
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>blurryBg</title>
+  <meta name="description"              content="show a blurry bg on a card"/>
+  <meta name="mobile-web-app-capable"   content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="msapplication-tap-highlight"  content="no"  />
+  <meta name="description"              content="show a blurry bg on a card"/>
+  <meta name="theme-color"              content="#EFF4FF"/>
+  <meta property="og:title"             content="blurryBg"/>
+  <meta property="og:description"       content="show a blurry bg on a card"/>
+  <meta property="og:image"             content="../assets/images/logo.png"/>
+  <meta property="og:url"               content=""/>
+
+  <link rel="apple-touch-icon" href="../assets/images/logo.png"/>
+  <link rel="icon"             href="../assets/images/logo.png"/>
+  <link rel="preload" as="font" crossorigin="anonymous" type="font/woff2"
+        href="../assets/fonts/monaSans/monaSans.woff2"/> <!--preload faster -->
+  <link rel="stylesheet"       href="../assets/fonts/monaSans/monaSans.css"/>
+  <link rel="stylesheet"       href="../modules/base.css"/> <!-- common -->
+  <link rel="stylesheet"       href="./blurryBg.css"/> <!--page specific-->
+  <script type="module"        src="./blurryBg.js"></script>
+</head><body>
+<div class=titleContainer>
+  <div class=title>blurryBg</div>
+  <div class=subtitle>showing a blurry background on a card</div>
+</div>
+
+<div class=mainContainer>
+  If you create a card with an image and you use css (object-fit or
+  background-size) 'cover', you run the risk that important parts of
+  the image get cut off:
+  <br>
+  <div class=cardContainer>
+    <div class=cardImageContainer>
+      <img class=cardImageWithCover src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Giraffe_Mikumi_National_Park.jpg/250px-Giraffe_Mikumi_National_Park.jpg" />
+    </div>
+    <div class=cardDescription>
+      Here the image's css is using cover to have the image
+      completely fill in the image container area, but this
+      causes poor cropping.
+    </div>
+  </div>
+  <br>
+
+  If instead you make the card image be contained, then you might get
+  pillars on either side:
+  <br>
+  <div class=cardContainer>
+    <div class=cardImageContainer>
+      <img class=cardImageWithContain src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Giraffe_Mikumi_National_Park.jpg/250px-Giraffe_Mikumi_National_Park.jpg" />
+    </div>
+    <div class=cardDescription>
+      Here the image's css is using contain to fit the entire image,
+      but there are pillars since the image is taller than it is wide.
+    </div>
+  </div>
+  <br>
+
+  To fix this, you can fill in the background of the container with
+  the same image, but scaled, blurred and darkened.  This works, but
+  only if the image is loaded statically:
+  <br>
+  <div class=cardContainer>
+    <div class=cardImageVarContainer>
+      <img class=cardImageVar src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Giraffe_Mikumi_National_Park.jpg/250px-Giraffe_Mikumi_National_Park.jpg" />
+    </div>
+    <div class=cardDescription>
+      To get rid of the pillars, the container behind the image
+      also loads the image with a blur filter. This works because the
+      image is loaded in the HTML.
+    </div>
+  </div>
+  <br>
+
+  If you load the image dynamically in javascript, then the filter
+  does not work:
+  <br>
+  <div id=card01></div>
+  <br>
+
+  To fix this, you can assign a css variable to the image and then in
+  the javascript, change the value of the css var. This, oddly, does
+  work:
+  <pre>
+    <b>js:</b>
+    cardImageContainer.style.setProperty('--before-bg', 'url(...)');
+  </pre>
+  <br>
+  <div id=card02></div>
+  <br>
+</div> <!-- mainContainer -->
+</body></html>

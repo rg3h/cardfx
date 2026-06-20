@@ -1,0 +1,165 @@
+/** @fileoverview: blurryBg.css css for blurryBg card
+/**                           _  __
+ ---         ___ __ _ _ __ __| |/ _|_  __
+|   |/\     / __/ _` | '__/ _` | |_\ \/ /
+|   |  \   | (_| (_| | | | (_| |  _|>  <
+|___| /     \___\__,_|_|  \__,_|_| /_/\_\
+    \/            project cardfx
+**/
+:root {
+  --cardFadeUpAnim:   fadeUpAnim 0.25s ease-in-out 0.25s forwards;
+  --before-bg:        url('./cardImage.jpg');
+}
+
+body {
+  align-items:        center;
+  accent-color:       var(--blue);
+  background-color:   #d3f3ff;
+  display:            flex;
+  flex-direction:     column;
+  font-family:        Arial, sans-serif;
+  font-family:        monaSans;
+  margin:             0;
+  overflow:           hidden;
+  padding:            0;
+}
+
+pre {
+  font-size:          0.7rem;
+  overflow:           auto;
+}
+
+.titleContainer {
+  align-items:        center;
+  display:            flex;
+  flex-direction:     column;
+  margin-bottom:      1.5rem;
+  width:              100%;
+}
+
+.title {
+  font-family:        monaSansExtraLight;
+  font-size:          3.0rem;
+  text-align:         center;
+  width:              100%;
+}
+
+.subtitle {
+  font-family:        monaSansExtraLight;
+  font-size:          1rem;
+  margin-top:         -0.5rem;
+  text-align:         center;
+}
+
+.mainContainer {
+  align-items:        center;
+  background:         rgb(255, 255, 255);
+  border-radius:      1rem;
+  box-shadow:         5px 5px 5px rgba(0, 0, 0, 0.25);
+  display:            flex;
+  flex-direction:     column;
+  margin-bottom:      1.5rem;
+  max-width:          600px;
+  padding:            1rem;
+  overflow:           auto;
+}
+
+.cardContainer {
+  align-self:         center;
+  animation:          var(--cardFadeUpAnim);
+  background:         white;
+  border:             solid 1px rgb(200, 200, 200);
+  border-radius:      1rem;
+  box-shadow:         4px 4px 12px rgba(0,0,0,0.1);
+  height:             15rem;
+  margin:             1rem 0 2rem 0;
+  opacity:            0;
+  width:              13rem;
+}
+
+.cardImageContainer {
+  border-radius:      1rem 1rem 0 0;
+  height:             50%;
+  width:              100%;
+  position:           relative;
+  overflow:           hidden;
+}
+
+.cardImageWithCover {
+  border-radius:      1rem 1rem 0 0;
+  height:             100%;
+  object-fit:         cover;
+  object-position:    center;
+  position:           relative;
+  width:              100%;
+}
+
+.cardImageWithContain {
+  border-radius:      1rem 1rem 0 0;
+  height:             100%;
+  object-fit:         contain;
+  object-position:    center;
+  position:           relative;
+  width:              100%;
+}
+
+
+.cardImageVarContainerWithoutBefore,
+.cardImageVarContainer {
+  border-radius:      1rem 1rem 0 0;
+  height:             50%;
+  overflow:           hidden;
+  position:           relative;
+  width:              100%;
+}
+
+.cardImageVarContainer::before {
+  background-image:   var(--before-bg);
+  background-size:    cover;
+  border-radius:      1rem 1rem 0 0;
+  content:            '';
+  filter:             blur(2px) brightness(80%);
+  height:             100%;
+  justify-content:    center;
+  left:               0;
+  object-fit:         contain;
+  position:           absolute;
+  top:                0;
+  transform:          scale(1.1);
+  width:              100%;
+  z-index:            1;
+}
+
+.cardImageVar {
+  align-items:        center;
+  border-radius:      1rem 1rem 0 0;
+  display:            flex;
+  height:             100%;
+  justify-content:    center;
+  object-fit:         contain;
+  object-position:    center;
+  position:           relative;
+  width:              100%;
+  z-index:            2;
+}
+
+.cardDescription {
+  font-size:          0.8rem;
+  height:             60%;
+  padding:            0.5rem;
+  overflow:           auto;
+}
+
+/* detect phone */
+@media screen and (any-pointer: coarse) and (max-width: 900px) {
+}
+
+/* detect phone in portrait */
+@media screen and
+(any-pointer: coarse) and (orientation: portrait) and (max-width: 400px) {
+}
+
+/* detect phone in landscape */
+@media screen and
+(any-pointer: coarse) and (orientation: landscape) and (max-width: 900px) {
+}
