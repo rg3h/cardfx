@@ -18,9 +18,8 @@ body {
 .pre {
   display:                    block;
   font-family:                "Courier New", monospace;
-  font-size:                  0.9rem;
+  font-size:                  0.8rem;
   unicode-bidi:               embed;
-  //  white-space:            pre;
 }
 
 .pageTopCap {
