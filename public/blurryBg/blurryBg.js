@@ -1,65 +1,67 @@
 /**
  * @fileoverview otd01.js js for on this day experiment 01
  *
-/*   @@@@@@@@@@@@@@@@@@
-     @@@@@@@@@@@@@@@@@@
-     |                |
-     |    J  A  N  N  |
-     |    J A A NN N  |
-     |    J A A NNNN  |
-     | J  J AAA N NN  |   on this day
-     |  JJ  A A N  N  |
-     |                |
-     |       11       |
-     |      111       |
-     |       11       |
-     |       11       |
-     |      1111      |
-     |________________|
-*/
+/**                           _  __
+ ---         ___ __ _ _ __ __| |/ _|_  __
+|   |/\     / __/ _` | '__/ _` | |_\ \/ /
+|   |  \   | (_| (_| | | | (_| |  _|>  <
+|___| /     \___\__,_|_|  \__,_|_| /_/\_\
+    \/            project cardfx
+**/
 import {createDiv, createImg} from '../modules/html/html.js';
 import {isArray, prettyJson}  from '../modules/util/util.js';
-
-const IMAGE_URL = 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Giraffe_Mikumi_National_Park.jpg/250px-Giraffe_Mikumi_National_Park.jpg';
 
 window.addEventListener('load', main);
 
 async function main() {
-  let x = await createBlurryCardWithBg(document.getElementById('card01'));
-  await createBlurryCardWithSetProperty(document.getElementById('card02'));
+  // for example, fetching the giraffe information from wikipedia
+  let imageUrl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/' +
+      '9/9e/Giraffe_Mikumi_National_Park.jpg/' +
+      '250px-Giraffe_Mikumi_National_Park.jpg';
 
-  // force a refresh so the document centers the created objects
-  console.log(x.offsetWidth, x.offsetHeight);
-} // main
+  let description = 'Giraffes are large African hoofed mammals. ' +
+      'They are the tallest living terrestrial animals on Earth.';
 
+  // create a blurry card from the image url, but the blurring fails
+  await createBlurryCard(imageUrl, description);
 
-async function createBlurryCardWithBg(parent) {
-  const card        = await createCard(parent, IMAGE_URL, true);
-  const description = 'card setting:<pre>backgroundImage url</pre>';
-  card.cardDescription.innerHTML = description;
-  card.cardImageContainer.style.backgroundImage = `url(${IMAGE_URL})`;
-  parent.appendChild(card.cardContainer);
-  return card.cardContainer;
+  // create a blurry card from the image url, but the blurring succeeds
+  await createBlurryCardWithSetProperty(imageUrl, description);
 }
 
 
-async function createBlurryCardWithSetProperty(parent) {
-  const card        = await createCard(parent, IMAGE_URL, false);
-  const description = 'card setting:<pre>setProperty(--before-bg, ...)</pre>'
-  card.cardDescription.innerHTML = description;
-  card.cardImageContainer.style.setProperty('--before-bg', `url(${IMAGE_URL})`);
-  parent.appendChild(card.cardContainer);
-  return card.cardContainer;
+// create a blurry card from the image url, but the blurring fails
+async function createBlurryCard(imageUrl, description) {
+  let parent = document.getElementById('dynamicCard');
+  const {card, cardImageContainer} =
+        await createCard(parent, imageUrl, description);
+
+  // setting the background does NOT invoke the css filter
+  cardImageContainer.style.background = `url(${imageUrl})`;
+  return card;
 }
 
 
-async function createCard(parent, imageUrl, useFirst=true) {
-  let cardContainer       = createDiv(null, 'cardContainer');
-  let imgContainerClass   = useFirst ? 'cardImageVarContainerWithoutBefore'
-      : 'cardImageVarContainer';
-  let cardImageContainer  = createDiv(cardContainer, imgContainerClass);
-  await createImg(cardImageContainer, 'cardImageVar', imageUrl, true);
-  let cardDescription     = createDiv(cardContainer, 'cardDescription');
+// create a blurry card from the image url, but the blurring succeeds
+async function createBlurryCardWithSetProperty(imageUrl, description) {
+  let parent = document.getElementById('dynamicCardWithSetProperty');
 
-  return {cardContainer, cardImageContainer, cardDescription};
+  const {card, cardImageContainer} =
+        await createCard(parent, imageUrl, description);
+
+  // setting the css var assigned to the background DOES invoke the filter
+  cardImageContainer.style.setProperty('--dynamicallyLoadedImg',
+                                       `url(${imageUrl})`);
+  return card;
+}
+
+
+// dynamic card creation with an image and a description
+async function createCard(parent, imageUrl, description) {
+  let cardContainer      = createDiv(parent,       'cardContainer');
+  let cardImageContainer = createDiv(cardContainer,'dynamicCardImageContainer');
+  await createImg(cardImageContainer, 'cardImageWithBlurryBg', imageUrl, true);
+  createDiv(cardContainer, 'cardDescription', description);
+
+  return {cardContainer, cardImageContainer};
 }

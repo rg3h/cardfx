@@ -8,7 +8,7 @@
 **/
 :root {
   --cardFadeUpAnim:   fadeUpAnim 0.25s ease-in-out 0.25s forwards;
-  --before-bg:        url('./cardImage.jpg');
+  --htmlLoadedImg:    url('https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Giraffe_Mikumi_National_Park.jpg/250px-Giraffe_Mikumi_National_Park.jpg');
 }
 
 body {
@@ -17,23 +17,38 @@ body {
   background-color:   #d3f3ff;
   display:            flex;
   flex-direction:     column;
-  font-family:        Arial, sans-serif;
-  font-family:        monaSans;
+  font-family:        monaSans, arial, sans-serif;
+  font-size:          15px;
   margin:             0;
   overflow:           hidden;
   padding:            0;
 }
 
+.pre {
+  align-self:         flex-start;
+  display:            block;
+  font-family:        courier new, monospace;
+  font-size:          0.7rem;
+  unicode-bidi:       embed;
+  white-space:        pre;
+}
+
 pre {
+  align-self:         flex-start;
   font-size:          0.7rem;
   overflow:           auto;
+}
+
+.highlight {
+  background:         yellow;
+  font-weight:        bold;
 }
 
 .titleContainer {
   align-items:        center;
   display:            flex;
   flex-direction:     column;
-  margin-bottom:      1.5rem;
+  margin-bottom:      1rem;
   width:              100%;
 }
 
@@ -45,21 +60,31 @@ pre {
 }
 
 .subtitle {
-  font-family:        monaSansExtraLight;
-  font-size:          1rem;
+  font-family:        monaSansLight;
+  font-size:          0.9rem;
   margin-top:         -0.5rem;
   text-align:         center;
 }
 
 .mainContainer {
-  align-items:        center;
+  align-items:        top;
+  display:            flex;
+  flex-wrap:          wrap;
+  gap:                2rem;
+  justify-content:    center;
+  margin:             1rem;
+  overflow:           auto;
+  padding-bottom:     1rem;
+}
+
+.recipeCard {
   background:         rgb(255, 255, 255);
   border-radius:      1rem;
   box-shadow:         5px 5px 5px rgba(0, 0, 0, 0.25);
   display:            flex;
   flex-direction:     column;
-  margin-bottom:      1.5rem;
-  max-width:          600px;
+  height:             fit-content;
+  width:              320px;
   padding:            1rem;
   overflow:           auto;
 }
@@ -72,53 +97,52 @@ pre {
   border-radius:      1rem;
   box-shadow:         4px 4px 12px rgba(0,0,0,0.1);
   height:             15rem;
-  margin:             1rem 0 2rem 0;
+  margin:             1rem 0 0rem 0;
   opacity:            0;
-  width:              13rem;
+  width:              15rem;
 }
 
-.cardImageContainer {
+.dynamicCardContainer {
+  align-self: center;
+  widrh: 100%;
+}
+
+.dynamicCardImageContainer,       /* js uses this when creating a card */
+.cardImageContainerWithBlurryBg,  /* html uses this to create a blurry card */
+.cardImageContainer {             /* html uses this to create a card */
   border-radius:      1rem 1rem 0 0;
-  height:             50%;
+  height:             70%;
   width:              100%;
   position:           relative;
   overflow:           hidden;
+}
+
+.cardImageWithCover,      /* image covers the area and gets cropped */
+.cardImageWithContain,    /* whole image is visible but there is extra space */
+.cardImageWithBlurryBg,   /* image has a blurry bg image to fill in the space */
+.cardImage {
+  border-radius:      1rem 1rem 0 0;
+  height:             100%;
+  object-position:    center;
+  position:           relative;
+  width:              100%;
 }
 
 .cardImageWithCover {
-  border-radius:      1rem 1rem 0 0;
-  height:             100%;
   object-fit:         cover;
-  object-position:    center;
-  position:           relative;
-  width:              100%;
 }
 
 .cardImageWithContain {
-  border-radius:      1rem 1rem 0 0;
-  height:             100%;
   object-fit:         contain;
-  object-position:    center;
-  position:           relative;
-  width:              100%;
 }
 
-
-.cardImageVarContainerWithoutBefore,
-.cardImageVarContainer {
-  border-radius:      1rem 1rem 0 0;
-  height:             50%;
-  overflow:           hidden;
-  position:           relative;
-  width:              100%;
-}
-
-.cardImageVarContainer::before {
-  background-image:   var(--before-bg);
+.dynamicCardImageContainer::before,           /* js uses this */
+.cardImageContainerWithBlurryBg::before {     /* html uses this */
+  background-image:   var(--htmlLoadedImg);
   background-size:    cover;
   border-radius:      1rem 1rem 0 0;
   content:            '';
-  filter:             blur(2px) brightness(80%);
+  filter:             blur(2px) brightness(70%);
   height:             100%;
   justify-content:    center;
   left:               0;
@@ -130,28 +154,31 @@ pre {
   z-index:            1;
 }
 
-.cardImageVar {
-  align-items:        center;
-  border-radius:      1rem 1rem 0 0;
-  display:            flex;
+.cardImageWithBlurryBg {
   height:             100%;
-  justify-content:    center;
   object-fit:         contain;
-  object-position:    center;
-  position:           relative;
   width:              100%;
   z-index:            2;
 }
 
+.dynamicCardImageContainer::before {          /* js sets the var */
+  background-image:   var(--dynamicallyLoadedImg);
+}
+
 .cardDescription {
   font-size:          0.8rem;
-  height:             60%;
   padding:            0.5rem;
   overflow:           auto;
 }
 
+/* a narrow browser width */
+@media (max-width: 900px) {
+  .mainContainer {margin: 0;}
+}
+
 /* detect phone */
 @media screen and (any-pointer: coarse) and (max-width: 900px) {
+  .title {font-size: 2rem;}
 }
 
 /* detect phone in portrait */

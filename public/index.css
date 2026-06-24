@@ -17,7 +17,7 @@ body {
 
 .pre {
   display:                    block;
-  font-family:                "Courier New", monospace;
+  font-family:                courier new, monospace;
   font-size:                  0.8rem;
   unicode-bidi:               embed;
 }

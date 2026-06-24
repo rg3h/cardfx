@@ -38,67 +38,136 @@
 </div>
 
 <div class=mainContainer>
-  If you create a card with an image and you use css (object-fit or
-  background-size) 'cover', you run the risk that important parts of
-  the image get cut off:
-  <br>
-  <div class=cardContainer>
-    <div class=cardImageContainer>
-      <img class=cardImageWithCover src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Giraffe_Mikumi_National_Park.jpg/250px-Giraffe_Mikumi_National_Park.jpg" />
-    </div>
-    <div class=cardDescription>
-      Here the image's css is using cover to have the image
-      completely fill in the image container area, but this
-      causes poor cropping.
-    </div>
-  </div>
-  <br>
+  <div class=recipeCard>
+    If you create a card with an image and you use css object-fit:cover,
+    you run the risk that important parts of the image get cut off:
+    <div>&nbsp;</div>
 
-  If instead you make the card image be contained, then you might get
-  pillars on either side:
-  <br>
-  <div class=cardContainer>
-    <div class=cardImageContainer>
-      <img class=cardImageWithContain src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Giraffe_Mikumi_National_Park.jpg/250px-Giraffe_Mikumi_National_Park.jpg" />
+    <div class=cardContainer>
+      <div class=cardImageContainer>
+        <img class=cardImageWithCover src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Giraffe_Mikumi_National_Park.jpg/250px-Giraffe_Mikumi_National_Park.jpg" />
+      </div>
+      <div class=cardDescription>
+        Giraffes are large African hoofed
+        mammals. They are the tallest living terrestrial animals on Earth.
+      </div>
     </div>
-    <div class=cardDescription>
-      Here the image's css is using contain to fit the entire image,
-      but there are pillars since the image is taller than it is wide.
-    </div>
-  </div>
-  <br>
 
-  To fix this, you can fill in the background of the container with
-  the same image, but scaled, blurred and darkened.  This works, but
-  only if the image is loaded statically:
-  <br>
-  <div class=cardContainer>
-    <div class=cardImageVarContainer>
-      <img class=cardImageVar src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Giraffe_Mikumi_National_Park.jpg/250px-Giraffe_Mikumi_National_Park.jpg" />
+    <div class=pre>
+      .cardImage {
+        object-fit: cover;
+      }
     </div>
-    <div class=cardDescription>
-      To get rid of the pillars, the container behind the image
-      also loads the image with a blur filter. This works because the
-      image is loaded in the HTML.
+  </div> <!-- recipeCard -->
+
+  <div class=recipeCard>
+    If instead you make the card image be contained, then you might get
+    pillars on either side:
+    <div>&nbsp;</div> <div>&nbsp;</div>
+
+    <div class=cardContainer>
+      <div class=cardImageContainer>
+        <img class=cardImageWithContain src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Giraffe_Mikumi_National_Park.jpg/250px-Giraffe_Mikumi_National_Park.jpg" />
+      </div>
+      <div class=cardDescription>
+        Giraffes are large African hoofed
+        mammals. They are the tallest living terrestrial animals on Earth.
+      </div>
     </div>
-  </div>
-  <br>
 
-  If you load the image dynamically in javascript, then the filter
-  does not work:
-  <br>
-  <div id=card01></div>
-  <br>
+    <div class=pre>
+      .cardImage {
+        object-fit: contain;
+      }
+    </div>
+  </div> <!-- recipeCard -->
 
-  To fix this, you can assign a css variable to the image and then in
-  the javascript, change the value of the css var. This, oddly, does
-  work:
-  <pre>
-    <b>js:</b>
-    cardImageContainer.style.setProperty('--before-bg', 'url(...)');
-  </pre>
-  <br>
-  <div id=card02></div>
-  <br>
+  <div class=recipeCard>
+    One solution is to fill in the background of the parent image
+    container with the same image, but scaled, blurred, and darkened.
+    The CSS is simple, but only if the image is loaded in the HTML:
+
+    <div class=cardContainer>
+      <div class=cardImageContainerWithBlurryBg>
+        <img class=cardImageWithBlurryBg
+             src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Giraffe_Mikumi_National_Park.jpg/250px-Giraffe_Mikumi_National_Park.jpg" />
+      </div>
+      <div class=cardDescription>
+        Giraffes are large African hoofed
+        mammals. They are the tallest living terrestrial animals on Earth.
+      </div>
+    </div>
+    <div class=pre>
+.cardImageContainerWithBlurryBg::before {
+  background-image: url('./giraffe.jpg');
+  background-size:  cover;
+  content:          '';
+  <span class=highlight>filter:   blur(2px) brightness(70%);</span>
+  height:           100%;
+  left:             0;
+  position:         absolute;
+  top:              0;
+  <span class=highlight>transform:        scale(1.1);</span>
+  width:            100%;
+  z-index:          1;
+}
+    </div>
+
+  </div> <!-- recipeCard -->
+
+  <div class=recipeCard>
+    If you load the image dynamically in javascript, then the filter
+    does not work:
+    <div>&nbsp;</div>
+
+    <div style="align-self:center" id=dynamicCard></div>
+
+    <div class=pre>
+async function createCard(imageUrl, text) {
+  const {card, imgContainer} =
+    await createCard(imageUrl, text);
+
+  // setting bg does NOT invoke css filters
+  imgContainer.style.background =
+    `url(${imageUrl})`;
+  return card;
+}
+    </div> <!-- pre -->
+  </div> <!-- recipeCard -->
+
+  <div class=recipeCard>
+    To fix this, you can assign a css variable to the image and then in
+    the javascript, change the value of the css var:
+
+    <div style="align-self:center" id=dynamicCardWithSetProperty></div>
+
+    <div class=pre>
+async function createCard(imageUrl, text) {
+  const {card, imgContainer} =
+    await createCard(imageUrl, text);
+
+  // setting css var assigned to background
+  // DOES invoke the filter
+  imgContainer.style.setProperty(
+    '--dynamicallyLoadedImg',
+    `url(${imageUrl})`
+  );
+  return card;
+}
+    </div> <!-- pre -->
+  </div> <!-- recipeCard -->
+
+  <div class=recipeCard>
+    <b>Conclusion</b><br>
+    Creating cards dynamically is useful, but variations in browsers,
+    devices, and sizes can make layout tricky.
+    <div>&nbsp;</div>
+    This is just another weird case where doing something dynamically
+    in javascript may run afoul of the order in which the css and html
+    layout values are evaluated.
+
+  </div> <!-- recipeCard -->
+
+
 </div> <!-- mainContainer -->
 </body></html>
