@@ -1,4 +1,4 @@
-<!DOCTYPE html> <!-- @fileoverview: testWikiLib.html -->
+<!DOCTYPE html> <!-- @fileoverview: blurryBg.html -->
 <html lang="en">
 <head>
 <!--                          _  __
@@ -41,7 +41,6 @@
   <div class=recipeCard>
     If you create a card with an image and you use css object-fit:cover,
     you run the risk that important parts of the image get cut off:
-    <div>&nbsp;</div>
 
     <div class=cardContainer>
       <div class=cardImageContainer>
@@ -63,8 +62,6 @@
   <div class=recipeCard>
     If instead you make the card image be contained, then you might get
     pillars on either side:
-    <div>&nbsp;</div> <div>&nbsp;</div>
-
     <div class=cardContainer>
       <div class=cardImageContainer>
         <img class=cardImageWithContain src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Giraffe_Mikumi_National_Park.jpg/250px-Giraffe_Mikumi_National_Park.jpg" />
@@ -118,7 +115,6 @@
   <div class=recipeCard>
     If you load the image dynamically in javascript, then the filter
     does not work:
-    <div>&nbsp;</div>
 
     <div style="align-self:center" id=dynamicCard></div>
 
@@ -160,11 +156,12 @@ async function createCard(imageUrl, text) {
   <div class=recipeCard>
     <b>Conclusion</b><br>
     Creating cards dynamically is useful, but variations in browsers,
-    devices, and sizes can make layout tricky.
+    devices, and sizes can make the layout tricky.
     <div>&nbsp;</div>
-    This is just another weird case where doing something dynamically
-    in javascript may run afoul of the order in which the css and html
-    layout values are evaluated.
+    This is just an interesting case where doing something dynamically
+    in javascript may run afoul of when css filters are applied.
+    <div>&nbsp;</div>
+    <a href="./blurryBgExample.html">Here is a working example in one file.</a>
 
   </div> <!-- recipeCard -->
 

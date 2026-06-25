@@ -1,0 +1,129 @@
+<!DOCTYPE html> <!-- @fileoverview: blurryBgExample.html -->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>blurryBg Example</title>
+  <meta name="description" content="example of setting a blurry bg
+                                    on a dynamically (js) generated card"/>
+  <meta name="mobile-web-app-capable"       content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="msapplication-tap-highlight"  content="no"  />
+  <link rel="apple-touch-icon" href="../assets/images/logo.png"/>
+  <link rel="icon"             href="../assets/images/logo.png"/>
+  <style>
+    *, *::before, *::after {
+      box-sizing:       border-box;
+    }
+
+    body {
+      align-items:      center;
+      background-color: #d3f3ff;
+      display:          flex;
+      flex-direction:   column;
+      font-family:      arial;
+      gap:              1rem;
+      height:           100%;
+      justify-content:  center;
+      padding-top:      5rem;
+    }
+
+   .cardContainer {
+    align-self:         center;
+    background:         white;
+    border-radius:      1rem;
+    border:             solid 1px rgb(200, 200, 200);
+    box-shadow:         4px 4px 12px rgba(0,0,0,0.1);
+    height:             15rem;
+    width:              15rem;
+  }
+
+  .cardImageContainer {
+    border-radius:      1rem 1rem 0 0;
+    height:             70%;
+    overflow:           hidden;
+    position:           relative;
+    width:              100%;
+  }
+
+  .cardImageContainer::before {
+    background-image:   var(--cardImage);  /* the key to success */
+    background-size:    cover;
+    border-radius:      1rem 1rem 0 0;
+    content:            '';
+    filter:             blur(2px) brightness(70%);
+    height:             100%;
+    justify-content:    center;
+    left:               0;
+    object-fit:         contain;
+    position:           absolute;
+    top:                0;
+    transform:          scale(1.1);
+    width:              100%;
+    z-index:            1;
+  }
+
+  .cardImage {
+    border-radius:      1rem 1rem 0 0;
+    height:             100%;
+    object-fit:         contain;
+    object-position:    center;
+    position:           relative;
+    width:              100%;
+    z-index:            2;
+  }
+
+  .cardDescription {
+    font-size:          0.8rem;
+    overflow:           auto;
+    padding:            0.5rem;
+  }
+  </style>
+  <script>
+    window.addEventListener('load', main);
+
+    async function main() {
+      // dynamically fetch a giraffe from wikipedia
+      let imageUrl = 'https://upload.wikimedia.org/wikipedia/commons/' +
+          'thumb/9/9e/Giraffe_Mikumi_National_Park.jpg/' +
+          '250px-Giraffe_Mikumi_National_Park.jpg';
+
+      let description = 'Giraffes are large African hoofed mammals. ' +
+          'They are the tallest living terrestrial animals on Earth.';
+
+      let cardContainer      = createDiv(document.body, 'cardContainer');
+      let cardImageContainer = createDiv(cardContainer, 'cardImageContainer');
+      await createImg(cardImageContainer, 'cardImage', imageUrl);
+      createDiv(cardContainer, 'cardDescription', description);
+
+      // setting the css var assigned to the background DOES invoke the filter
+      cardImageContainer.style.setProperty('--cardImage', `url(${imageUrl})`);
+    }
+
+    function createElement(elementName, parent, opt_className) {
+      let element = document.createElement(elementName);
+      opt_className ? element.classList.add(opt_className) : null;
+      parent ? parent.appendChild(element) : null;
+      return element;
+    }
+
+    function createDiv (parent, opt_classNameOrList, opt_text) {
+      let element = createElement('div', parent, opt_classNameOrList);
+      opt_text ? element.textContent = opt_text : null;
+      return element;
+    }
+
+    // returns a promise so we can wait for the image to load
+    function createImg (parent, classNameOrList, url) {
+      return new Promise((resolve, reject) => {
+        let element = createElement('img', parent, classNameOrList);
+        element.onload = () => resolve(element);
+        element.onerror = reject;
+        element.src = url;
+      });
+    }
+  </script>
+</head><body>
+<div>copy this webpage and try it out.</div>
+</body></html>

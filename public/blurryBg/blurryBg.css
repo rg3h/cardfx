@@ -67,14 +67,14 @@ pre {
 }
 
 .mainContainer {
-  align-items:        top;
+  align-items:        center;
   display:            flex;
-  flex-wrap:          wrap;
+  flex-direction:     column;
   gap:                2rem;
-  justify-content:    center;
   margin:             1rem;
   overflow:           auto;
   padding-bottom:     1rem;
+  width: 100%;
 }
 
 .recipeCard {
@@ -86,7 +86,6 @@ pre {
   height:             fit-content;
   width:              320px;
   padding:            1rem;
-  overflow:           auto;
 }
 
 .cardContainer {
@@ -104,7 +103,7 @@ pre {
 
 .dynamicCardContainer {
   align-self: center;
-  widrh: 100%;
+  width: 100%;
 }
 
 .dynamicCardImageContainer,       /* js uses this when creating a card */

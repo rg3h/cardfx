@@ -1,5 +1,5 @@
 /**
- * @fileoverview otd01.js js for on this day experiment 01
+ * @fileoverview blurryBg.js
  *
 /**                           _  __
  ---         ___ __ _ _ __ __| |/ _|_  __
