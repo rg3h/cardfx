@@ -63,7 +63,6 @@ export {
   return element;
 }
 
-
 /*export*/ function createElement(elementName, parent, opt_classNameOrList) {
   let element = document.createElement(elementName);
   addClassNameOrList(element, opt_classNameOrList);

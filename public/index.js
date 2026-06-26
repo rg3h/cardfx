@@ -7,19 +7,32 @@
 |___| /     \___\__,_|_|  \__,_|_| /_/\_\
     \/            project cardfx
 **/
-import {formatDate, updateOnTheMinute} from './modules/date/date.js';
-
 window.addEventListener('load', main);
+
 async function main() {
-  return init();
+  updateDateOnTheMinute();
 } // main
 
-async function init() {
-  updateOnTheMinute(updateTitleDateEle);
-  return 1;
-}
 
-function updateTitleDateEle() {
-  let dateEle = document.getElementsByClassName('topDate');
-  dateEle.length > 0 ? dateEle[0].innerText = formatDate('DD MMMM YYYY') : null;
+function updateDateOnTheMinute() {
+  // update the date and time
+  const now = Temporal.Now.zonedDateTimeISO();
+  let formattedDate = now.toLocaleString('en-GB', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true,
+  });
+
+  formattedDate = formattedDate.replace(' at ', '<br>');
+  const dateEle = document.getElementsByClassName('topRightSectionDate')[0];
+  dateEle.innerHTML = formattedDate;
+
+  // compute the time until the next update
+  let theDate = new Date();
+  let secondsLeft = 60 - theDate.getSeconds(); // secs until minute mark
+  let ms = secondsLeft < 0 ? 0 : secondsLeft * 1000;
+  setTimeout(updateDateOnTheMinute, ms);
 }
